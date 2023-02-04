@@ -4,10 +4,13 @@ import { Table } from 'antd';
 
 export
 function List2() {
-  const update = async (params: any) => {
-    return (await axios.post('/api/xsea/workspace/list', params)).data.object;
-  };
-  const { isLoading, error, data } = useQuery('jimao', update);
+  const { isLoading, error, data } = useQuery(
+    ['jimao'],
+    () => axios.post('/api/xsea/workspace/list', {
+      pageNum: 1,
+      pageSize: 1e6,
+    }).then((rsp) => rsp.data.object)
+  );
   if (error) return <span>失败了</span>;
   return <Table
     bordered
