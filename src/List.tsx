@@ -1,19 +1,20 @@
 import React from 'react';
-import { useQuery } from 'react-query'
+import { useQuery } from 'react-query';
+import axios from 'axios';
 
 export
 function List() {
-  const { isLoading, error, data } = useQuery('jimao', async () => {
-    const result = await fetch('https://api.github.com/repos/tannerlinsley/react-query');
-    return result.json();
-  });
+  const update = async () => {
+    return (await axios.post('/api/xsea/workspace/page', {
+      pageNum: 1,
+      pageSize: 1e6,
+    })).data.object;
+  };
+
+  const { isLoading, error, data } = useQuery('jimao', update);
   if (isLoading) return <span>加载中</span>;
   if (error) return <span>失败了</span>;
-  return <div>
-    <h1>{data.name}</h1>
-    <p>{data.description}</p>
-    <strong>👀 {data.subscribers_count}</strong>{' '}
-    <strong>✨ {data.stargazers_count}</strong>{' '}
-    <strong>🍴 {data.forks_count}</strong>
-  </div>;
+  return <ul>
+    {(data.list || []).map((item: any) => <li key={item.id}>{item.name}</li>)}
+  </ul>;
 }
