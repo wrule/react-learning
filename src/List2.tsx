@@ -1,15 +1,14 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import { Table } from 'antd';
+import { useState } from 'react';
 
 export
 function List2() {
+  const [params, set_params] = useState<any>({ pageNum: 1, pageSize: 1e6 });
   const { isLoading, error, data } = useQuery(
-    ['jimao'],
-    () => axios.post('/api/xsea/workspace/list', {
-      pageNum: 1,
-      pageSize: 1e6,
-    }).then((rsp) => rsp.data.object)
+    ['wklist', params],
+    () => axios.post('/api/xsea/workspace/list', params).then((rsp) => rsp.data.object)
   );
   if (error) return <span>失败了</span>;
   return <Table
