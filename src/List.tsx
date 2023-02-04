@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import { Table } from 'antd';
 
 export
 function List() {
@@ -12,9 +13,19 @@ function List() {
   };
 
   const { isLoading, error, data } = useQuery('jimao', update);
-  if (isLoading) return <span>加载中</span>;
+  // if (isLoading) return <span>加载中</span>;
   if (error) return <span>失败了</span>;
-  return <ul>
-    {(data.list || []).map((item: any) => <li key={item.id}>{item.name}</li>)}
-  </ul>;
+  return <Table
+    bordered
+    rowKey="id"
+    size="small"
+    loading={isLoading}
+    columns={[
+      { title: '名称', dataIndex: 'name' },
+      { title: '问题数', dataIndex: 'bugCount' },
+      { title: '项目数', dataIndex: 'projectCount' },
+      { title: '备注', dataIndex: 'remark' },
+    ]}
+    dataSource={data?.list}
+  />;
 }
