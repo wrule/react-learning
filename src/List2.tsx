@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 export
 function List2() {
-  const [params, set_params] = useState<any>({ pageNum: 1, pageSize: 1e6 });
+  const [params, set_params] = useState<any>({ pageNum: 1, pageSize: 5 });
   const { isLoading, error, data } = useQuery(
     ['wklist', params],
     () => axios.post('/api/xsea/workspace/list', params).then((rsp) => rsp.data.object)
