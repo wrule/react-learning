@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-import { List } from './List';
+import { List1 } from './List1';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import { Space } from 'antd';
+import { List2 } from './List2';
  
 const queryClient = new QueryClient();
 
@@ -22,9 +24,12 @@ function App() {
 
   return (
     <div className="App">
-     <QueryClientProvider client={queryClient}>
-       <List />
-     </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <Space direction="horizontal">
+          <List1 />
+          <List2 />
+        </Space>
+      </QueryClientProvider>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
