@@ -6,7 +6,7 @@ import { Table } from 'antd';
 export
 function List() {
   const update = async () => {
-    return (await axios.post('/api/xsea/workspace/page', {
+    return (await axios.post('/api/xsea/workspace/list', {
       pageNum: 1,
       pageSize: 1e6,
     })).data.object;
@@ -24,7 +24,7 @@ function List() {
       { title: '名称', dataIndex: 'name' },
       { title: '问题数', dataIndex: 'bugCount' },
       { title: '项目数', dataIndex: 'projectCount' },
-      { title: '备注', dataIndex: 'remark' },
+      { title: '备注', dataIndex: 'remark', width: 400, ellipsis: true },
     ]}
     dataSource={data?.list}
   />;
