@@ -29,8 +29,8 @@ function App() {
           <Layout.Header></Layout.Header>
           <Layout.Content style={{ padding: '20px' }}>
             <Row gutter={16}>
-              <Col span={12}><List1 /></Col>
-              <Col span={12}><List2 /></Col>
+              <Col span={24}><List1 /></Col>
+              {/* <Col span={12}><List2 /></Col> */}
             </Row>
           </Layout.Content>
         </Layout>
