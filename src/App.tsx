@@ -27,7 +27,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Space direction="horizontal">
           <List1 />
-          {/* <List2 /> */}
+          <List2 />
         </Space>
       </QueryClientProvider>
       {/* <header className="App-header">
