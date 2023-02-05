@@ -4,7 +4,7 @@ import './App.css';
 import axios from 'axios';
 import { List1 } from './List1';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
-import { Space } from 'antd';
+import { Space, Layout, Row, Col } from 'antd';
 import { List2 } from './List2';
  
 const queryClient = new QueryClient();
@@ -25,10 +25,18 @@ function App() {
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>
-        <Space direction="horizontal">
-          <List1 />
-          <List2 />
-        </Space>
+        <Layout>
+          <Layout.Header></Layout.Header>
+          <Layout.Content style={{ padding: '20px' }}>
+            <Row gutter={16}>
+              <Col span={12}><List1 /></Col>
+              <Col span={12}><List2 /></Col>
+            </Row>
+          </Layout.Content>
+        </Layout>
+        {/* <Space direction="horizontal">
+
+        </Space> */}
       </QueryClientProvider>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
