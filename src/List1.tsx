@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import { Table, Space, Button, Row, Modal } from 'antd';
+import { Table, Space, Button, Row, Modal, Form, Input } from 'antd';
 import { useState } from 'react';
 
 export
@@ -45,6 +45,14 @@ function List1() {
       title={modal?.id ? '编辑产品' : '新增产品'}
       visible={modal}
       onCancel={() => set_modal(null)}>
+      <Form layout="vertical">
+        <Form.Item label="产品名称" name="productName" rules={[{ required: true }]}>
+          <Input placeholder="请输入产品名称" />
+        </Form.Item>
+        <Form.Item label="产品描述" name="productDesc">
+          <Input.TextArea placeholder="请输入产品描述" />
+        </Form.Item>
+      </Form>
     </Modal>
   </Space>;
 }
