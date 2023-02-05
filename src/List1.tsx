@@ -25,7 +25,7 @@ function List1() {
     dataSource={data?.list}
     pagination={{
       total: data?.total,
-      pageSize: params.pageSize,
+      pageSize: data?.pageSize,
       onChange: (nv) => set_params({ ...params, pageNum: nv }),
     }}
   />;
