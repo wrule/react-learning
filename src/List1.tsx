@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import { Table, Space, Button, Row, Modal, Form, Input } from 'antd';
+import { Table, Space, Button, Row, Modal, Form, Input, Popconfirm } from 'antd';
 import { useState } from 'react';
 
 export
@@ -38,7 +38,11 @@ function List1() {
               form.setFieldsValue({ productName: row.name, productDesc: row.remark });
               set_modal(row);
             }}>编辑</Button>
-            <Button size="small" type="link">删除</Button>
+            <Popconfirm
+              title="删除确认"
+              description="确认删除此产品？">
+              <Button size="small" type="link">删除</Button>
+            </Popconfirm>
           </Space>;
         } },
       ]}
