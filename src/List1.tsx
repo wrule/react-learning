@@ -8,7 +8,8 @@ function List1() {
   const [params, set_params] = useState<any>({ pageNum: 1, pageSize: 5 });
   const { isLoading, error, data } = useQuery(
     ['wklist', params],
-    ({ queryKey }) => axios.post('/api/xsea/workspace/list', queryKey[1]).then((rsp) => rsp.data.object)
+    ({ queryKey }) => axios.post('/api/xsea/workspace/list', queryKey[1]).then((rsp) => rsp.data.object),
+    { keepPreviousData: true },
   );
   if (error) return <span>失败了</span>;
   return <Table
