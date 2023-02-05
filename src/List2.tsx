@@ -17,11 +17,16 @@ function List2() {
     size="small"
     loading={isLoading}
     columns={[
-      { title: '名称', dataIndex: 'name' },
+      { title: '名称', dataIndex: 'name', width: '30%', ellipsis: true },
       { title: '问题数', dataIndex: 'bugCount' },
       { title: '项目数', dataIndex: 'projectCount' },
-      { title: '备注', dataIndex: 'remark', width: 400, ellipsis: true },
+      { title: '备注', dataIndex: 'remark', width: '30%', ellipsis: true },
     ]}
     dataSource={data?.list}
+    pagination={{
+      total: data?.total,
+      pageSize: data?.pageSize,
+      onChange: (nv) => set_params({ ...params, pageNum: nv }),
+    }}
   />;
 }
