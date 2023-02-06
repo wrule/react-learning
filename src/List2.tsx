@@ -1,6 +1,6 @@
 import { Table, Space, Button, Row, Modal, Form, Input, Popconfirm } from 'antd';
 import { useState } from 'react';
-import { useList } from './api';
+import { useList } from './useApi';
 
 export
 function List2() {
