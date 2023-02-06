@@ -1,6 +1,8 @@
 import { useQuery } from 'react-query';
 import * as api from './api';
 
+export * from './api';
+
 export
 const useList = (params: any, options?: any) => {
   return useJimao(api.list, params, options);
