@@ -1,6 +1,6 @@
 import { Table, Space, Button, Row, Modal, Form, Input, Popconfirm } from 'antd';
 import { useState } from 'react';
-import { list, useJimao } from './api';
+import { useList } from './api';
 
 export
 function List2() {
@@ -8,7 +8,7 @@ function List2() {
   const [modal, set_modal] = useState<any>(null);
   const [form] = Form.useForm();
 
-  const { isLoading, error, data } = useJimao(list, params);
+  const { isLoading, error, data } = useList(params);
 
   if (error) return <span>失败了</span>;
   return <Space direction="vertical">
