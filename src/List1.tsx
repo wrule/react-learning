@@ -1,18 +1,15 @@
-import { useQuery } from 'react-query';
-import axios from 'axios';
 import { Table, Space, Button, Row, Modal, Form, Input, Popconfirm } from 'antd';
 import { useState } from 'react';
+import { list, useJimao } from './api';
 
 export
 function List1() {
   const [params, set_params] = useState<any>({ pageNum: 1, pageSize: 5 });
   const [modal, set_modal] = useState<any>(null);
   const [form] = Form.useForm();
-  const { isLoading, error, data } = useQuery(
-    ['wklist', params],
-    ({ queryKey }) => axios.post('/api/xsea/workspace/list', queryKey[1]).then((rsp) => rsp.data.object),
-    { keepPreviousData: true },
-  );
+
+  const { isLoading, error, data } = useJimao(list, params);
+
   if (error) return <span>失败了</span>;
   return <Space direction="vertical">
     <Row justify="end">
