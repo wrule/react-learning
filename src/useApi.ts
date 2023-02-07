@@ -14,7 +14,7 @@ type B = {
 const b: B = { } as any;
 
 
-type Options = any;
+type Options = Parameters<typeof useQuery>[2];
 type Params = Parameters<typeof api.list>;
 type ParamsExt = [...Params, Options?];
 
