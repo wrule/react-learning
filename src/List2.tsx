@@ -1,6 +1,6 @@
 import { Table, Space, Button, Row, Modal, Form, Input, Popconfirm } from 'antd';
 import { useState } from 'react';
-import { useList } from './useApi';
+import { useApi_list } from './useApi';
 
 export
 function List2() {
@@ -8,7 +8,7 @@ function List2() {
   const [modal, set_modal] = useState<any>(null);
   const [form] = Form.useForm();
 
-  const { isLoading, error, data } = useList(params);
+  const { isLoading, error, data } = useApi_list(params);
 
   if (error) return <span>失败了</span>;
   return <Space direction="vertical">
