@@ -9,6 +9,31 @@ import { List2 } from './List2';
  
 const queryClient = new QueryClient();
 
+
+type A = {
+  a: string;
+  b: boolean;
+  c: number;
+  d: () => void;
+  e: (a: string) => void;
+  f: (a: string, b: string) => void;
+  g: (a: string, b: string, c: string) => void;
+};
+
+type B = {
+  [
+    Key in keyof A & string
+    as A[Key] extends Function ? `useApi_${Key}` : never
+  ]: A[Key];
+};
+
+
+
+
+
+
+
+
 function App() {
   const update = async () => {
     // const rsp = await axios.post('/api/xsea/workspace/page', {
