@@ -20,13 +20,13 @@ type ParamsExt = [...Params, Options?];
 
 export
 function useApi_list(...paramsExt: ParamsExt) {
-  return useApi(api.list, paramsExt);
+  return useApi(api.list, ...paramsExt);
 };
 
 export
 function useApi<T extends (...args: any) => any>(
   func: T,
-  paramsExt: [...Parameters<T>, Options?],
+  ...paramsExt: [...Parameters<T>, Options?]
 ) {
   let options: any = undefined;
   let params: any = paramsExt;
