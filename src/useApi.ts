@@ -16,13 +16,10 @@ const b: B = { } as any;
 
 type Options = any;
 type Params = Parameters<typeof api.list>;
-type ParamsExt = [...Params, Options?];
 
 export
-function useApi_list(...paramsExt: ParamsExt) {
-  const params = paramsExt.slice(0, paramsExt.length - 1) as Params;
-  const options = paramsExt[paramsExt.length - 1] as Options;
-  return useApi(api.list, params, options);
+function useApi_list(...params: Params) {
+  return useApi(api.list, params);
 };
 
 export
