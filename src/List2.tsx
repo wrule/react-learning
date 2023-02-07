@@ -8,7 +8,7 @@ function List2() {
   const [modal, set_modal] = useState<any>(null);
   const [form] = Form.useForm();
 
-  const { isLoading, error, data } = useApi_list(params);
+  const { isLoading, error, data } = useApi_list(params, false);
 
   if (error) return <span>失败了</span>;
   return <Space direction="vertical">

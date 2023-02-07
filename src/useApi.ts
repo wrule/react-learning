@@ -38,7 +38,7 @@ function useApi<T extends (...args: any) => any>(
   return useQuery(
     [func, ...params],
     ({ queryKey }) => {
-      return func(queryKey[1]);
+      return func(...queryKey.slice(1));
     },
     options,
   );
