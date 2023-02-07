@@ -20,26 +20,23 @@ type ParamsExt = [...Params, Options?];
 
 export
 function useApi_list(...paramsExt: ParamsExt) {
-  let options: any = undefined;
-  let params: any = paramsExt;
-  if (paramsExt.length > api.list.length) {
-    params = paramsExt.slice(0, paramsExt.length - 1);
-    options = paramsExt[paramsExt.length - 1];
-  }
-  return useApi(api.list, params, options);
+  return useApi(api.list, paramsExt);
 };
 
 export
 function useApi<T extends (...args: any) => any>(
   func: T,
-  params: Parameters<T>,
-  options?: Options,
+  paramsExt: [...Parameters<T>, Options?],
 ) {
+  let options: any = undefined;
+  let params: any = paramsExt;
+  if (paramsExt.length > func.length) {
+    params = paramsExt.slice(0, paramsExt.length - 1);
+    options = paramsExt[paramsExt.length - 1];
+  }
   return useQuery(
     [func, ...params],
-    ({ queryKey }) => {
-      return func(...queryKey.slice(1));
-    },
+    ({ queryKey }) => func(...queryKey.slice(1)),
     options,
   );
 }
