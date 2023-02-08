@@ -1,6 +1,8 @@
 import { Table, Space, Button, Row, Modal, Form, Input, Popconfirm } from 'antd';
 import { useState } from 'react';
-import { useApi_list } from './useApi';
+import { useQuery } from 'react-query';
+import { list } from './api';
+import { useApi } from './useApi';
 
 export
 function List1() {
@@ -8,7 +10,12 @@ function List1() {
   const [modal, set_modal] = useState<any>(null);
   const [form] = Form.useForm();
 
-  const { isLoading, error, data } = useApi_list(params,);
+  // const { isLoading, error, data } = useQuery(
+  //   [list, params],
+  //   ({ queryKey }) => list(queryKey[1]),
+  // );
+
+  const { isLoading, error, data } = useApi(list)(params);
 
   if (error) return <span>失败了</span>;
   return <Space direction="vertical">
