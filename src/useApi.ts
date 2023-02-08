@@ -9,14 +9,9 @@ function add(a: number, b: string) {
   return a + b;
 }
 
-function UseApi<T extends AnyFunction>(api: T) {
-  return (...args: UseApiParamsType<T>) => useApi(api, ...args);
-}
-
 const k1 = useQuery([add, 1, '2'], ({ queryKey }) => add(1, '2'));
 const k2 = UseApi(add)(1, '2');
 
-export
 function useApi<T extends AnyFunction>(api: T, ...args: UseApiParamsType<T>) {
   let options: any = undefined;
   let arg_keys: any[] = args;
@@ -29,4 +24,9 @@ function useApi<T extends AnyFunction>(api: T, ...args: UseApiParamsType<T>) {
     ({ queryKey }) => api(...queryKey.slice(1)) as ReturnType<T>,
     options,
   );
+}
+
+export
+function UseApi<T extends AnyFunction>(api: T) {
+  return (...args: UseApiParamsType<T>) => useApi(api, ...args);
 }
