@@ -12,7 +12,10 @@ type UseApiReturnType<T extends AnyFunction> = ReturnType<typeof useApi<T>>;
 // const k1 = useQuery([add, 1, '2'], ({ queryKey }) => add(1, '2'));
 // const k2 = useApi(add)(1, '2');
 
-function _useApi<T extends AnyFunction>(api: T, ...args: UseApiParamsType<T>) {
+function _useApi<T extends AnyFunction>(
+  api: T,
+  ...args: UseApiParamsType<T>
+) {
   let options: any = undefined;
   let arg_keys: any[] = args;
   if (arg_keys.length > api.length) {
