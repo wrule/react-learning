@@ -3,24 +3,19 @@ import * as api from './api';
 
 export * from './api';
 
-type A = typeof api;
-type C<T extends (...p: any[]) => Promise<any>> = (...p: [...Parameters<T>, boolean]) => {
-  raw: ReturnType<T>
-};
+type ApiType = typeof api;
 
-type B = {
+type AnyFunction = (...args: any) => any;
+
+type UseApiType = {
   [
-    Key in keyof A & string
-    as A[Key] extends Function ? `useApi_${Key}` : never
-  ]: C<A[Key]>;
+    Key in keyof ApiType & string
+    as ApiType[Key] extends AnyFunction ? `useApi_${Key}` : never
+  ]: () => void;
 };
 
-
-type ll = C<typeof list>;
-
-
-const b: B = { } as any;
-b.useApi_list()
+const b: UseApiType = { } as any;
+b.useApi_list();
 
 type Options = Parameters<typeof useQuery>[2];
 type Params = Parameters<typeof api.list>;
