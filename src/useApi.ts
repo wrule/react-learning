@@ -5,17 +5,21 @@ export * from './api';
 
 type ApiType = typeof api;
 
-type AnyFunction = (...args: any) => any;
+type AnyFunction = (...args: any) => any | Promise<any>;
 
-type UseApiType = {
+type UseApiType<T> = {
   [
-    Key in keyof ApiType & string
-    as ApiType[Key] extends AnyFunction ? `useApi_${Key}` : never
-  ]: () => void;
+    Key in keyof T & string
+    as T[Key] extends AnyFunction ? `useApi_${Key}` : never
+  ]: T[Key]
 };
 
-const b: UseApiType = { } as any;
-b.useApi_list();
+function UseApi<T>(api: T) {
+  return { } as UseApiType<T>;
+}
+
+UseApi(api).useApi_list(123);
+
 
 type Options = Parameters<typeof useQuery>[2];
 type Params = Parameters<typeof api.list>;
