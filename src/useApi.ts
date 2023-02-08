@@ -1,41 +1,25 @@
 import { useQuery } from 'react-query';
 import * as api from './api';
 
-type AnyFunction = (...args: any) => any | Promise<any>;
-
-type UseApiType<T> = {
-  [
-    Key in keyof T & string
-    as T[Key] extends AnyFunction ? `useApi_${Key}` : never
-  ]: T[Key]
-};
-
-function UseApi<T>(api: T) {
-  return { } as UseApiType<T>;
-}
-
-UseApi(api).useApi_list(123);
-
-
 type Options = Parameters<typeof useQuery>[2];
-type Params = Parameters<typeof api.list>;
-type ParamsExt = [...Params, Options?];
+type AnyFunction = (...args: any) => any | Promise<any>;
+type UseApiParamsType<T extends AnyFunction> = Parameters<T> | [...Parameters<T>, Options?];
+type UseApiReturnType<T extends AnyFunction> = ReturnType<typeof useApi<T>>;
 
-export
-function useApi_list(...paramsExt: ParamsExt) {
-  return useApi(api.list, ...paramsExt);
-};
+function add(a: number, b: string) {
+  return a + b;
+}
 
 export
 function useApi<T extends (...args: any) => any>(
   func: T,
-  ...paramsExt: [...Parameters<T>, Options?]
+  ...paramsExt: UseApiParamsType<T>
 ) {
   let options: any = undefined;
-  let params: any = paramsExt;
-  if (paramsExt.length > func.length) {
-    params = paramsExt.slice(0, paramsExt.length - 1);
-    options = paramsExt[paramsExt.length - 1];
+  let params: any[] = paramsExt;
+  if (params.length > func.length) {
+    params = params.slice(0, params.length - 1);
+    options = params[params.length - 1];
   }
   return useQuery(
     [func, ...params],
