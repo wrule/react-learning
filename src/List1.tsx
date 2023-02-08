@@ -1,6 +1,5 @@
 import { Table, Space, Button, Row, Modal, Form, Input, Popconfirm } from 'antd';
 import { useState } from 'react';
-import { useQuery } from 'react-query';
 import { list } from './api';
 import { useApi } from './useApi';
 
@@ -9,11 +8,6 @@ function List1() {
   const [params, set_params] = useState<any>({ pageNum: 1, pageSize: 5 });
   const [modal, set_modal] = useState<any>(null);
   const [form] = Form.useForm();
-
-  // const { isLoading, error, data } = useQuery(
-  //   [list, params],
-  //   ({ queryKey }) => list(queryKey[1]),
-  // );
 
   const { isLoading, error, data } = useApi(list)(params);
 
