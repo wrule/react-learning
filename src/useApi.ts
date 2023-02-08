@@ -1,10 +1,6 @@
 import { useQuery } from 'react-query';
 import * as api from './api';
 
-export * from './api';
-
-type ApiType = typeof api;
-
 type AnyFunction = (...args: any) => any | Promise<any>;
 
 type UseApiType<T> = {
