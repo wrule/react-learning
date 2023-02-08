@@ -26,10 +26,6 @@ function useApi_list(...paramsExt: ParamsExt) {
   return useApi(api.list, ...paramsExt);
 };
 
-type UAT<T extends F> = (
-  ...args: [...Parameters<typeof useApi<T>>, Options?]
-) => ReturnType<typeof useApi<T>>
-
 export
 function useApi<T extends (...args: any) => any>(
   func: T,
