@@ -10,6 +10,13 @@ function add(a: number, b: string) {
   return a + b;
 }
 
+function UseApi<T extends AnyFunction>(api: T) {
+  return (...args: UseApiParamsType<T>) => useApi(api, ...args);
+}
+
+const k1 = useQuery([add], ({ queryKey }) => add(1, '2'));
+const k2 = useApi(add, 1, '2');
+
 export
 function useApi<T extends (...args: any) => any>(
   func: T,
