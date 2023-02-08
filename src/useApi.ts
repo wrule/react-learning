@@ -1,5 +1,4 @@
 import { useQuery } from 'react-query';
-import * as api from './api';
 
 type Options = Parameters<typeof useQuery>[2];
 type AnyFunction = (...args: any) => any | Promise<any>;
