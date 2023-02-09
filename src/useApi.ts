@@ -1,13 +1,10 @@
 import { useQuery } from 'react-query';
 
 type Options = Parameters<typeof useQuery>[2];
-type AnyFunction = (...args: any) => any | Promise<any>;
-type UseApiParamsType<T extends AnyFunction> = Parameters<T> | [...Parameters<T>, Options?];
+type AnyFunction = (...args: any) => any;
+type UseApiArgsType<T extends AnyFunction> = Parameters<T> | [...Parameters<T>, Options?];
 
-function _useApi<T extends AnyFunction>(
-  api: T,
-  ...args: UseApiParamsType<T>
-) {
+function _useApi<T extends AnyFunction>(api: T, ...args: UseApiArgsType<T>) {
   let options: any = undefined;
   let arg_keys: any[] = args;
   if (arg_keys.length > api.length) {
@@ -23,5 +20,5 @@ function _useApi<T extends AnyFunction>(
 
 export
 function useApi<T extends AnyFunction>(api: T) {
-  return (...args: UseApiParamsType<T>) => _useApi(api, ...args);
+  return (...args: UseApiArgsType<T>) => _useApi(api, ...args);
 }
