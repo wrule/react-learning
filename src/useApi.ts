@@ -3,11 +3,9 @@ import { useQuery } from 'react-query';
 type Options = Parameters<typeof useQuery>[2];
 type AnyFunction = (...args: any) => any | Promise<any>;
 type UseApiParamsType<T extends AnyFunction> = Parameters<T> | [...Parameters<T>, Options?];
-type UseApiReturnType<T extends AnyFunction> = ReturnType<typeof useApi<T>>;
-type AwaitedFunction<T extends AnyFunction> = (...args: Parameters<T>) => Awaited<ReturnType<T>>
 
 function _useApi<T extends AnyFunction>(
-  api: AwaitedFunction<T>,
+  api: T,
   ...args: UseApiParamsType<T>
 ) {
   let options: any = undefined;
@@ -16,9 +14,9 @@ function _useApi<T extends AnyFunction>(
     options = arg_keys[arg_keys.length - 1];
     arg_keys = arg_keys.slice(0, arg_keys.length - 1);
   }
-  return useQuery(
+  return useQuery<Awaited<ReturnType<T>>>(
     [api, ...arg_keys],
-    ({ queryKey }) => api(...queryKey.slice(1) as Parameters<T>),
+    ({ queryKey }) => api(...queryKey.slice(1)),
     options,
   );
 }
