@@ -1,7 +1,7 @@
 import { Table, Space, Button, Row, Modal, Form, Input, Popconfirm } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { list } from './api';
-import { useApi } from './useApi';
+import { useApi, useCall } from './useApi';
 
 export
 function List1() {
@@ -11,9 +11,23 @@ function List1() {
 
   const { isLoading, error, data } = useApi(list)(params);
 
+  const update = async () => {
+    const rsp = await useCall(list)(params);
+    console.log(rsp);
+  };
+
+  update();
+
+  // useEffect(() => {
+  //   update();
+  // });
+
   if (error) return <span>失败了</span>;
   return <Space direction="vertical">
     <Row justify="end">
+      <Button onClick={() => {
+        update();
+      }}>测试</Button>
       <Button size="small" type="primary" onClick={() => {
         const data = { productName: '', productDesc: '' };
         form.setFieldsValue(data);
