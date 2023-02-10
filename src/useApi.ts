@@ -22,3 +22,17 @@ export
 function useApi<T extends AnyFunction>(api: T) {
   return (...args: UseApiArgsType<T>) => _useApi(api, ...args);
 }
+
+const _useQuery = useQuery;
+
+export
+function useCall<T extends AnyFunction>(api: T) {
+  return (...args: UseApiArgsType<T>) => new Promise<Awaited<ReturnType<T>>>((resolve, reject) => _useQuery<Awaited<ReturnType<T>>>(
+    [api, ...args],
+    ({ queryKey }) => api(...queryKey.slice(1)),
+    {
+      onSuccess: resolve,
+      onError: reject,
+    },
+  ));;
+}
