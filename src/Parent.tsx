@@ -1,13 +1,11 @@
 import { Button, Space } from 'antd';
 import react, { useMemo, useState } from 'react';
 import { Child } from './Child';
-import { UserInfoContext } from './Context';
+import UserInfoContext from './Context';
 
 export
 const Parent = () => {
-  const [num, set_num] = useState<number>(0);
-
-  const numb = useMemo(() => num * 2, [num]);
+  const [userInfo, setUserInfo] = useState({ name: 'jimao', age: 30 });
 
   console.log('父组件渲染');
   return <div>
@@ -15,17 +13,15 @@ const Parent = () => {
     <div>
       <Space>
         <Button onClick={() => {
-          set_num(num + 1);
-        }}>点我</Button>
-        <span>{numb}</span>
+          setUserInfo({
+            ...userInfo,
+            age: userInfo.age - 1,
+          });
+        }}>{userInfo.name}</Button>
+        <span>{userInfo.age}</span>
       </Space>
     </div>
-    <UserInfoContext.Provider value={{
-      id: '1',
-      name: 'jimao',
-      sex: '男',
-      age: num,
-    }}>
+    <UserInfoContext.Provider value={[userInfo, setUserInfo]}>
       <Child />
     </UserInfoContext.Provider>
   </div>;
