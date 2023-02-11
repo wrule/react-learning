@@ -1,6 +1,7 @@
 import { Button, Space } from 'antd';
 import react, { useMemo, useState } from 'react';
 import { Child } from './Child';
+import { UserInfoContext } from './Context';
 
 export
 const Parent = () => {
@@ -19,6 +20,13 @@ const Parent = () => {
         <span>{numb}</span>
       </Space>
     </div>
-    <Child />
+    <UserInfoContext.Provider value={{
+      id: '1',
+      name: 'jimao',
+      sex: '男',
+      age: num,
+    }}>
+      <Child />
+    </UserInfoContext.Provider>
   </div>;
 };
