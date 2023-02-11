@@ -6,6 +6,7 @@ import { List1 } from './List1';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 import { Space, Layout, Row, Col } from 'antd';
 import { List2 } from './List2';
+import { Parent } from './Parent';
  
 const queryClient = new QueryClient();
 
@@ -54,8 +55,9 @@ function App() {
           <Layout.Header></Layout.Header>
           <Layout.Content style={{ padding: '20px' }}>
             <Row gutter={16}>
-              <Col span={12}><List1 /></Col>
-              <Col span={12}><List2 /></Col>
+              <Parent />
+              {/* <Col span={12}><List1 /></Col>
+              <Col span={12}><List2 /></Col> */}
             </Row>
           </Layout.Content>
         </Layout>
