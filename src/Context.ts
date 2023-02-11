@@ -1,18 +1,16 @@
-import react from 'react';
+import react, { useContext } from 'react';
 
-export
-interface UserInfo {
-  id: string;
-  name: string;
-  sex: string;
-  age: number;
-  remark?: string;
+function CreateContext<T>(defaultValue: T) {
+  const tuple = [defaultValue, (value: T) => { }] as [T, (value: T) => void];
+  return react.createContext(tuple);
 }
 
-export
-const UserInfoContext = react.createContext<UserInfo>({
+const context = CreateContext({
   id: '',
   name: '',
   sex: '男',
   age: 30,
 });
+
+const [a, b] = useContext(context);
+b()
